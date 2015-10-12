@@ -6,6 +6,7 @@ https://github.com/fivethirtyeight/data/tree/master/college-majors
 """
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # College majors and employment
 all_ages = pd.read_csv("all-ages.csv")
@@ -44,4 +45,17 @@ for major in majors:
     else:
         all_ages_lower_emp_count += 1
     
+# data visualization
+columns = ['Median','Sample_size']
+recent_grads.hist(column=columns, layout=(2,1), grid=False)
+#change bins number
+recent_grads.hist(column=columns, bins=50)
+#box plot 
+recent_grads[['Total', 'Major_category']].boxplot(by='Major_category')
+plt.xticks(rotation=90)
+# multiple plots
+plt.scatter(recent_grads["Unemployment_rate"], recent_grads["P25th"], color="red")    
+plt.scatter(recent_grads["ShareWomen"], recent_grads["P25th"], color="blue")
+plt.show()
+
         
